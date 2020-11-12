@@ -19,6 +19,15 @@ def xframe_options_deny(view_func):
         Modified by widya - added attribute forbid_site and original request (httprequestadd) to throw forbidden template in view function
         wrapped by xframe_options_deny
     """#----------------------------------------------
+
+    """----------------------------------------------
+        original:
+    def wrapped_view(*args, **kwargs):
+        resp = view_func(*args, **kwargs)
+        if resp.get('X-Frame-Options') is None:
+            resp['X-Frame-Options'] = 'DENY'
+        return resp
+    """#----------------------------------------------
     def wrapped_view(*args, **kwargs):
         resp = view_func(*args, **kwargs)
         if resp.get('X-Frame-Options') is None:
